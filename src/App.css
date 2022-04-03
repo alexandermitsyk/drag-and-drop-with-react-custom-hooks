@@ -1,38 +1,284 @@
 .App {
-  text-align: center;
+	text-align: center;
 }
 
 .App-logo {
-  height: 40vmin;
-  pointer-events: none;
+	height: 40vmin;
+	pointer-events: none;
+}
+
+body {
+    color: #2e2e2f;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+	.App-logo {
+		animation: App-logo-spin infinite 20s linear;
+	}
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+	background-color: #ebf0f7;
+	min-height: 100vh;
+	display: flex;
+	/* flex-direction: column;
+    align-items: center;
+    justify-content: center; */
+	font-size: calc(10px + 2vmin);
+	color: white;
+}
+
+.drag-n-drop {
+    padding: 20px;
+	display: grid;
+	gap: .5rem;
+	width: 100%;
+	height: 100%;
+	grid-template-columns: repeat(auto-fill, 300px);
+	align-items: start;
+}
+
+.dnd-group {
+	background-color: #ebf0f7;
+	border-radius: 5px;
+	padding: .5rem;
+}
+
+.dnd-item {
+    cursor: move;
+    background-color: #fff;
+    padding: 10px 15px;
+    border-radius: 8px;
+    width: 100%;
+    box-shadow: rgb(99 99 99 / 10%) 0px 2px 8px 0px;
+    margin-bottom: 1rem;
+    border: 3px dashed transparent;
+    flex-direction: column;
+    justify-content: flex-start;
+    text-align: left;
+    position: relative;
+}
+
+.modal {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal::before {
+    content: '';
+    position: absolute;
+    opacity: 0.6;
+    background-color: #fff;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 0;
+}
+
+button.remove-task 
+    {background-color: transparent;border: 0;
+    width: 30px;
+    height: 30px;
+    opacity: 0;
+    transition: all ease-in 100ms; 
+    position: absolute;
+    right: 10px;
+    top: 20px;
+    cursor: pointer;
+    visibility: hidden;
+}
+
+button.remove-task img {width: 30px;}
+
+.dnd-item:hover button.remove-task {opacity: 1;transition: all ease-in 200ms;     visibility: visible;}
+
+.dnd-item:hover {
+    box-shadow: rgb(99 99 99 / 30%) 0px 2px 8px 0px;
+    border-color: rgba(162, 179, 207, 0.2) !important;
+}
+
+.dnd-item p {
+    font-size: 15px;
+    margin: 15px 0;
+    color: #2e2e2f;
+}
+
+.dnd-item span {
+    border-radius: 100px;
+    padding: 2px 13px;
+    font-size: 12px;
+    width: fit-content;
+}
+
+.task__tag--design {
+    color: #2d86ba;
+    background-color: #ceecfd;
+}
+
+.task__tag--copyright {
+    color: #a734ba;
+    background-color: #f2dcf5;
+}
+
+.task__tag--illustration {
+    color: #13854e;
+    background-color: #d6ede2;
+}
+
+.group-title {
+	text-align: left;
+	margin-bottom: .5rem;
+	font-size: 1.5rem;
+    color: #2e2e2f;
+    display: grid;
+    align-items: center;
+    grid-template-columns: calc(100% - 30px) 30px;
+}
+
+.group-title button {
+    background: transparent;
+    color: #c4cad3;
+    font-size: 18px;
+    border: 0;
+    cursor: pointer;
+    border-radius: 8px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.group-title button img{
+    width: 30px;
+    height: 30px;
+}
+
+.current {
+    box-shadow: rgb(99 99 99 / 30%) 0px 2px 8px 0px;
+    border-color: rgba(162, 179, 207, 0.2) !important;
+    background-color: transparent;
 }
 
 .App-link {
-  color: #61dafb;
+	color: #61dafb;
 }
 
 @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+.navbar {
+    background-color: #ebf0f7;
+    padding: 20px 15px;
+    display: grid;
+    grid-template-columns: 300px calc(50% - 150px) calc(50% - 150px);
+}
+
+.add-button {
+    background: transparent;
+    border: 1px dashed #969696;
+    font-size: 0;
+    cursor: pointer;
+    position: relative;
+    border-radius: 50%;
+}
+
+.add-button::after {
+    content: "+";
+    font-size: 15px;
+    color: #969696;
+}
+
+.menu span, .add-button {
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    border-radius: 100rem;
+    margin: 0 0.2rem;
+}
+
+.menu span {
+    background-color: #7784ee;
+}
+
+.menu {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.button {
+    margin-left: 5px;
+    margin-right: 5px;
+    color: #fff;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 8px;
+    border: 0;
+}
+
+.primary-button {
+    background-color: #7784ee;
+}
+
+.default-button {
+    background-color: #ebf0f7;
+    color: rgb(63, 63, 63);
+    border-radius: 8px;
+}
+
+.modal-content {
+    background-color: #fff;
+    z-index: 1;
+    width: 400px;
+    box-shadow: 0 25px 50px -12px rgb(0 0 0 / 25%);
+    border-radius: 6px;
+}
+
+.modal-header {
+    text-align: left;
+    padding: 12px 19px;
+    font-size: 20px;
+    font-weight: 500;
+    border-bottom: 1px solid #f3f3f3;
+}
+
+
+.modal-body {
+    padding: 12px 19px;
+}
+
+.modal-input {
+    width: 100%;
+    border: 1px solid #f5f5f5;
+    border-radius: 4px;
+    padding: 9px 10px;
+    outline: 0;
+    margin-bottom: 10px;
+}
+
+.modal-footer {
+    text-align: right;
+    padding: 12px 19px;
+    border-top: 1px solid #f3f3f3;
+}
+
+.fluid {
+    width: 100%;
 }
